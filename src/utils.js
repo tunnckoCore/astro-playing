@@ -5,7 +5,7 @@ export const rand = (min, max) => {
 // https://ipfs.fleek.co/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm
 const chosen = [];
 const folder =
-  "https://gateway.ipfscdn.io/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm";
+  "https://cloudflare-ipfs.com/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm";
 
 export const getFakeItems = () =>
   Array(54)
@@ -29,6 +29,7 @@ export const getFakeItems = () =>
         title: `Ether Logs #${id}`, /////xx
         // name: `#${id}`,
         image: `${folder}/${id}.png`,
+        src: `${folder}/${id}.png`,
 
         price: num,
 

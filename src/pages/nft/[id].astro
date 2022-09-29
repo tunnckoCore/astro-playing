@@ -1,39 +1,44 @@
 ---
 import path from "path";
 
-import { Image } from "@astrojs/image/components";
+// import { Image } from "@astrojs/image/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import MarketItem from "../../components/MarketItem.astro";
 
-export async function getStaticPaths() {
-  const images = await Astro.glob("../../raw-images/*.png");
+// export async function getStaticPaths() {
+//   const images = await Astro.glob("../../raw-images/*.png");
 
-  return images.map((mod) => {
-    const basename = path.basename(mod.default.src);
-    const [id] = basename.split(".");
-    const { src, width, height, format } = mod.default;
-    const title = "Ether Logs #" + id;
+//   return images.map((mod) => {
+//     const basename = path.basename(mod.default.src);
+//     const [id] = basename.split(".");
+//     const title = "Ether Logs #" + id;
 
-    return {
-      props: { nft: { id, title, image: src, src, width, height, format } },
-      params: { id: id },
-    };
-  });
-}
+//     const { src, width, height, format } = mod.default;
 
-const { nft } = Astro.props;
+//     return {
+//       props: { nft: { id, title, image: src, src, width, height, format } },
+//       params: { id: id },
+//     };
+//   });
+// }
+
+const { id } = Astro.params;
+
+const nft = { title: "Ether Logs #" + id, src: "/images/" + id, id };
 ---
 
 <BaseLayout title={nft.title}>
-  <h1>{nft.title}</h1>
-  <div>
-    <!-- TODO: Inline it to base64, maybe -->
-    <Image
-      src={nft.src}
-      alt={nft.title}
-      width={nft.width}
-      height={nft.height}
-      aspectRation={`1:1`}
-      format="webp"
-    />
+  <div class="w-5/12 my-5 mx-auto">
+    <MarketItem title={nft.title} src={nft.src} id={nft.id} isPage={true} />
   </div>
 </BaseLayout>
+
+<!-- <BaseLayout title="Ether Logs #131">
+  <div class="w-96 mt-10 mx-auto">
+    <MarketItem
+      title="Ether Logs #131"
+      src="https://gateway.ipfscdn.io/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm/131.png"
+      id="131"
+    />
+  </div>
+</BaseLayout> -->
