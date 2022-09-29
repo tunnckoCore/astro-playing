@@ -1,0 +1,82 @@
+---
+/**
+
+{
+  "nfts": [
+    {
+      "contract": {
+        "address": "0x12423f35fa1e2969c73586788090f24ba72a6a1e"
+      },
+      "id": {
+        "tokenId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "tokenMetadata": {
+          "tokenType": "ERC721"
+        }
+      },
+      "title": "",
+      "description": "",
+      "tokenUri": {
+        "raw": "ipfs://bafybeidkmlh3m7j7zfxkoccbcalbnjm3s6yhx6ryrvw6xnlt7t6p5ro72u/0.json",
+        "gateway": "https://ipfs.io/ipfs/bafybeidkmlh3m7j7zfxkoccbcalbnjm3s6yhx6ryrvw6xnlt7t6p5ro72u/0.json"
+      },
+      "media": [
+        {
+          "raw": "",
+          "gateway": ""
+        }
+      ],
+      "metadata": {
+        "metadata": [],
+        "attributes": []
+      },
+      "timeLastUpdated": "2022-09-27T21:53:32.960Z",
+      "error": "Token uri responded with a non 200 response code",
+      "contractMetadata": {
+        "name": "Ether Logs",
+        "symbol": "ETHL",
+        "totalSupply": "500",
+        "tokenType": "ERC721"
+      }
+    },
+	],
+}
+
+ */
+
+import { Image } from "@astrojs/image/components";
+import path from "path";
+import MarketLayout from "../../layouts/MarketLayout.astro";
+
+export async function getStaticPaths() {
+	const images = await Astro.glob("../../nft-images/*.png");
+
+	return images.map((mod) => {
+		const basename = path.basename(mod.default.src);
+		const [id] = basename.split(".");
+		const { src, width, height, format } = mod.default;
+		const name = "Ether Logs #" + id;
+
+		return {
+			props: { nft: { id, name, url: src, src, width, height, format } },
+			params: { id: id },
+		};
+	});
+}
+
+const { nft } = Astro.props;
+---
+
+<MarketLayout title={nft.name}>
+	<h1>{nft.name}</h1>
+	<div>
+		<!-- TODO: Inline it tomorrow -->
+		<Image
+			src={nft.src}
+			alt={nft.name}
+			width={nft.width}
+			height={nft.height}
+			aspectRation={`1:1`}
+			format="webp"
+		/>
+	</div>
+</MarketLayout>

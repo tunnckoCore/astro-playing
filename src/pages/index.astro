@@ -1,0 +1,105 @@
+---
+import { Image } from "@astrojs/image/components";
+import MarketLayout from "../layouts/MarketLayout.astro";
+import { getFakeItems } from "../utils.js";
+
+// https://etherscan.io/nft/0x12423f35fa1e2969c73586788090f24ba72a6a1e/{id}
+// export async function getStaticPaths({}) {
+// 	const items = getFakeItems();
+
+// 	return items.map((item) => {
+// 		return {
+// 			params: item,
+// 			props: { item },
+// 		};
+// 	});
+// }
+
+// const { items } = Astro.props;
+
+const items = getFakeItems();
+---
+
+<style>
+	@keyframes zoomPulse {
+		50% {
+			transform: scale(1.1);
+		}
+	}
+	@keyframes heart-pulse {
+		0% {
+			transform: scale(1); /* scaling to 0 */
+		}
+		50% {
+			transform: scale(1.1); /* increasing the size */
+		}
+		100% {
+			transform: scale(1); /* seeting back to initial size */
+		}
+	}
+	.zoom-pulse:hover img {
+		/* transform: scale(1.1); */
+		animation: heart-pulse 0.8s infinite ease-in-out;
+	}
+</style>
+
+<MarketLayout>
+	<!-- Container for demo purpose -->
+	<div class="container my-12 px-6 mx-auto">
+		<!-- Section: Design Block -->
+		<section class="mb-32 text-gray-800">
+			<h2 class="text-6xl font-extrabold mb-12 text-center">
+				All listed <em class="text-green-400">Ether Logs</em>
+			</h2>
+
+			<div
+				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+			>
+				{
+					items &&
+						items.map((item) => (
+							<div
+								class="zoom-pulse shadow-xl rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
+								style=""
+							>
+								<img
+									src={item.url}
+									alt={item.name}
+									class="w-full  transition duration-300 ease-linear align-middle"
+								/>
+								<a
+									href={`https://etherscan.io/nft/0x12423f35fa1e2969c73586788090f24ba72a6a1e/${item.id}`}
+								>
+									<div
+										class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
+										style="background-color: rgba(0, 0, 0, 0.15)"
+									>
+										<div class="flex flex-col justify-between h-full">
+											<h5 class="flex text-slate-100 font-extrabold text-4xl m-6 sm:text-2xl sm:ml-3 sm:mt-2 md:text-xl md:ml-4 md:mt-3">
+												{item.name}
+											</h5>
+											<div class="m-3 sm:ml-3 sm:mb-2 md:ml-4 md:mb-3">
+												<div class="flex items-center justify-between">
+													<div class="py-1 px-2 rounded-lg bg-slate-100 bg-opacity-90 font-semibold text-xl sm:text-base md:text-sm">
+														<span class="">{item.price}</span> Ξ
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="hover-overlay">
+										<div
+											class="mask absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-100"
+											style="background-color: rgba(253, 253, 253, 0.15)"
+										/>
+									</div>
+								</a>
+							</div>
+						))
+				}
+			</div>
+		</section>
+		<!-- Section: Design Block -->
+	</div>
+	<!-- Container for demo purpose -->
+</MarketLayout>

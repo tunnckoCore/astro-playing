@@ -1,0 +1,116 @@
+---
+import MarketLayout from "../layouts/MarketLayout.astro";
+import { getFakeItems } from "../utils.js";
+
+const items = getFakeItems();
+---
+
+<MarketLayout title="Social Like" class="w-screen mx-auto">
+	<div class="flex flex-col">
+		{
+			items &&
+				items.map((item) => (
+					<section class="flex justify-center">
+						<article class="w-96 border bg-gray-100 text-gray-700 dark:bg-black dark:text-white">
+							<header class="flex items-center justify-between p-2">
+								<div class="flex items-center justify-center">
+									<div>
+										<img
+											src="https://i.pravatar.cc/48?img=5"
+											class="mr-2 rounded-full border border-gray-300 shadow-sm shadow-gray-200"
+										/>
+									</div>
+									<div>
+										<h2 class="text-lg font-semibold text-purple-500">
+											{item.name}
+										</h2>
+									</div>
+								</div>
+								<div class="flex items-center">
+									<span class="text-yellow-500">
+										<svg
+											class="h-6 w-6"
+											xmlns="http://www.w3.org/2000/svg"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke-width="1.5"
+											stroke="currentColor"
+											class="h-6 w-6"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+											/>
+										</svg>
+									</span>
+									<span class="pl-1 text-yellow-500">{item.sparkles}</span>
+									<span class="pl-2 text-cyan-500">
+										<svg
+											class="h-6 w-6"
+											xmlns="http://www.w3.org/2000/svg"
+											viewBox="0 0 24 24"
+											fill="currentColor"
+										>
+											<path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+											<path
+												fill-rule="evenodd"
+												d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z"
+												clip-rule="evenodd"
+											/>
+										</svg>
+									</span>
+									<span class="pl-1 text-cyan-500">{item.views}</span>
+								</div>
+							</header>
+							<main>
+								<span id="sa" class="cursor-pointer">
+									<img src={item.url} alt={`eth ${item.name}`} />
+								</span>
+							</main>
+							<footer class="p-2">
+								<div class="flex items-center justify-between">
+									<div class="flex items-center text-orange-500">
+										<span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												viewBox="0 0 24 24"
+												fill="currentColor"
+												class="h-6 w-6"
+											>
+												<path
+													fill-rule="evenodd"
+													d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.186 3.548.428a18.849 18.849 0 005.441-5.44c.758-1.16.492-2.629-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.879H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"
+													clip-rule="evenodd"
+												/>
+											</svg>
+										</span>
+										<span class="pl-1">
+											{item.highestOffer} <span class="text-lg">Ξ</span>
+										</span>
+									</div>
+									<div>
+										<a href="" class="flex items-center text-green-500">
+											<span>
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													viewBox="0 0 24 24"
+													fill="currentColor"
+													class="h-6 w-6"
+												>
+													<path d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z" />
+												</svg>
+											</span>
+											<span class="pl-1">
+												{item.price} <span class="text-lg">Ξ</span>
+											</span>
+										</a>
+									</div>
+								</div>
+							</footer>
+						</article>
+					</section>
+				))
+		}
+	</div>
+</MarketLayout>
