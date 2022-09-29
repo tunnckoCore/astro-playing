@@ -1,52 +1,52 @@
 export const rand = (min, max) => {
-	return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 // https://ipfs.fleek.co/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm
 const chosen = [];
 const folder =
-	"https://gateway.ipfscdn.io/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm";
+  "https://gateway.ipfscdn.io/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm";
 
 export const getFakeItems = () =>
-	Array(54)
-		.fill(0)
-		.map(function reducer(x) {
-			let id = x === 0 ? rand(1, 500) : x;
+  Array(54)
+    .fill(0)
+    .map(function reducer(x) {
+      let id = x === 0 ? rand(1, 500) : x;
 
-			if (chosen.includes(id)) {
-				return reducer(0);
-			}
+      if (chosen.includes(id)) {
+        return reducer(0);
+      }
 
-			chosen.push(id);
+      chosen.push(id);
 
-			const price = rand(1555.611, 11200.123);
-			const num = new Intl.NumberFormat("en-US", {
-				style: "decimal",
-			}).format(price + 1.4234);
+      const price = rand(1555.611, 11200.123);
+      const num = new Intl.NumberFormat("en-US", {
+        style: "decimal",
+      }).format(price + 1.4234);
 
-			return {
-				id,
-				name: `Ether Logs #${id}`, ////
-				// name: `#${id}`,
-				url: `${folder}/${id}.png`,
+      return {
+        id,
+        title: `Ether Logs #${id}`, ////
+        // name: `#${id}`,
+        image: `${folder}/${id}.png`,
 
-				price: num,
+        price: num,
 
-				highestOffer: new Intl.NumberFormat("en-US", {
-					style: "decimal",
-				}).format(price - price / 3),
+        highestOffer: new Intl.NumberFormat("en-US", {
+          style: "decimal",
+        }).format(price - price / 3),
 
-				// between 15,000 - 35,000
-				views: new Intl.NumberFormat("en-US", {
-					style: "decimal",
-				}).format(rand(15000, 35000)),
+        // between 15,000 - 35,000
+        views: new Intl.NumberFormat("en-US", {
+          style: "decimal",
+        }).format(rand(15000, 35000)),
 
-				// between 100 and 5500
-				sparkles: new Intl.NumberFormat("en-US", {
-					style: "decimal",
-				}).format(rand(100, 5500)),
-			};
-		});
+        // between 100 and 5500
+        sparkles: new Intl.NumberFormat("en-US", {
+          style: "decimal",
+        }).format(rand(100, 5500)),
+      };
+    });
 
 /** When needed to re-scrape/fetch APIs */
 // import { writeFile, mkdir } from "fs/promises";
