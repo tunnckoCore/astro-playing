@@ -19,14 +19,14 @@ export const getFakeItems = () =>
 
       chosen.push(id);
 
-      const price = rand(1555.611, 11200.123);
+      const price = rand(1.611, 100.123);
       const num = new Intl.NumberFormat("en-US", {
         style: "decimal",
       }).format(price + 1.4234);
 
       return {
         id,
-        title: `Ether Logs #${id}`, ////
+        title: `Ether Logs #${id}`, /////xx
         // name: `#${id}`,
         image: `${folder}/${id}.png`,
 
@@ -45,6 +45,11 @@ export const getFakeItems = () =>
         sparkles: new Intl.NumberFormat("en-US", {
           style: "decimal",
         }).format(rand(100, 5500)),
+
+        // between 1 and 300
+        rank: new Intl.NumberFormat("en-US", {
+          style: "decimal",
+        }).format(rand(1, 300)),
       };
     });
 

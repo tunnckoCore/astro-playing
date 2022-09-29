@@ -26,11 +26,14 @@ const items = getFakeItems();
     <!-- Section: Design Block -->
     <section class="mb-32 text-gray-800">
       <h2 class="text-6xl font-extrabold mb-12 text-center">
-        All listed <em class="text-green-400">Ether Logs</em>
+        <em
+          class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-green-500"
+          >Ether Logs</em
+        >
       </h2>
 
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4"
       >
         {
           items &&
@@ -39,7 +42,7 @@ const items = getFakeItems();
                 <img
                   src={item.image}
                   alt={item.title}
-                  class="w-full  transition duration-300 ease-linear align-middle"
+                  class="w-full transition duration-300 ease-linear align-middle"
                 />
                 <a
                   href={`https://etherscan.io/nft/0x12423f35fa1e2969c73586788090f24ba72a6a1e/${item.id}`}
@@ -49,13 +52,27 @@ const items = getFakeItems();
                     style="background-color: rgba(0, 0, 0, 0.15)"
                   >
                     <div class="flex flex-col justify-between h-full">
-                      <h5 class="flex text-slate-100 font-extrabold text-4xl m-6 sm:text-2xl sm:ml-3 sm:mt-2 md:text-xl md:ml-4 md:mt-3">
+                      <h5 class="flex text-slate-100 font-extrabold text-4xl m-4 sm:mt-2 sm:ml-3 sm:text-2xl  md:text-xl lg:text-base">
                         {item.title}
                       </h5>
-                      <div class="m-3 sm:ml-3 sm:mb-2 md:ml-4 md:mb-3">
+                      <div class="m-3 lg:m-2">
                         <div class="flex items-center justify-between">
-                          <div class="py-1 px-2 rounded-lg bg-slate-100 bg-opacity-90 font-semibold text-xl sm:text-base md:text-sm">
-                            <span class="">{item.price}</span> Ξ
+                          <div class="py-1 px-2 rounded-md bg-slate-100 bg-opacity-80 text-gray-800 font-semibold text-xl sm:text-base md:text-sm lg:text-xs xl:text-sm">
+                            Ξ<span class="pl-1">{item.price}</span>
+                          </div>
+                          <div class="py-1 px-2 rounded-md bg-slate-100 bg-opacity-80 text-gray-800 font-semibold text-xl sm:text-base md:text-sm lg:text-xs xl:text-sm">
+                            <div class="">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                class="w-4 h-4 inline-block m-0 p-0 sm:-mt-1 -mr-1.5"
+                              >
+                                <path d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z" />
+                              </svg>
+
+                              <span>{item.rank}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -81,7 +98,8 @@ const items = getFakeItems();
 <style>
   @keyframes zoomPulse {
     50% {
-      transform: scale(1.1);
+      /* transform: scale(1); */
+      opacity: 0.5;
     }
   }
   @keyframes heart-pulse {
