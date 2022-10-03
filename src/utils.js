@@ -1,58 +1,79 @@
-export const rand = (min, max) => {
+export function randInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min);
-};
+}
 
-// https://ipfs.fleek.co/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm
-const chosen = [];
-const folder =
-  "https://cloudflare-ipfs.com/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm";
+export function generateItemForId(id, data) {
+  return {
+    id,
+    title: "Ether Logs #" + id,
+    image: `/images/${id}.png`,
+    price: randInt(1, 444),
+    rank: randInt(1, 30),
+    isPage: false,
+    ...data,
+  };
+}
 
-export const getFakeItems = () =>
-  Array(54)
-    .fill(0)
-    .map(function reducer(x) {
-      let id = x === 0 ? rand(1, 500) : x;
+export function generateItems(max) {
+  const chosen = [];
+  const items = Array(max).fill(0);
 
-      if (chosen.includes(id)) {
-        return reducer(0);
-      }
+  return items;
+}
 
-      chosen.push(id);
+// // https://ipfs.fleek.co/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm
+// const chosen = [];
+// const folder =
+//   "https://cloudflare-ipfs.com/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm";
 
-      const price = rand(1.611, 100.123);
-      const num = new Intl.NumberFormat("en-US", {
-        style: "decimal",
-      }).format(price + 1.4234);
+// export const getFakeItems = () =>
+//   Array(54)
+//     .fill(0)
+//     .map(function reducer(x) {
+//       let id = x === 0 ? rand(1, 500) : x;
 
-      return {
-        id,
-        title: `Ether Logs #${id}`, /////xx
-        // name: `#${id}`,
-        image: `${folder}/${id}.png`,
-        src: `${folder}/${id}.png`,
+//       if (chosen.includes(id)) {
+//         return reducer(0);
+//       }
 
-        price: num,
+//       chosen.push(id);
 
-        highestOffer: new Intl.NumberFormat("en-US", {
-          style: "decimal",
-        }).format(price - price / 3),
+//       const price = rand(1.611, 100.123);
+//       const num = new Intl.NumberFormat("en-US", {
+//         style: "decimal",
+//       }).format(price + 1.4234);
 
-        // between 15,000 - 35,000
-        views: new Intl.NumberFormat("en-US", {
-          style: "decimal",
-        }).format(rand(15000, 35000)),
+//       return {
+//         id,
+//         title: `Ether Logs #${id}`, /////xx
+//         // name: `#${id}`,
+//         image: `${folder}/${id}.png`,
+//         src: `${folder}/${id}.png`,
 
-        // between 100 and 5500
-        sparkles: new Intl.NumberFormat("en-US", {
-          style: "decimal",
-        }).format(rand(100, 5500)),
+//         price: num,
 
-        // between 1 and 300
-        rank: new Intl.NumberFormat("en-US", {
-          style: "decimal",
-        }).format(rand(1, 300)),
-      };
-    });
+//         highestOffer: new Intl.NumberFormat("en-US", {
+//           style: "decimal",
+//         }).format(price - price / 3),
+
+//         // between 15,000 - 35,000
+//         views: new Intl.NumberFormat("en-US", {
+//           style: "decimal",
+//         }).format(rand(15000, 35000)),
+
+//         // between 100 and 5500
+//         sparkles: new Intl.NumberFormat("en-US", {
+//           style: "decimal",
+//         }).format(rand(100, 5500)),
+
+//         // between 1 and 300
+//         rank: new Intl.NumberFormat("en-US", {
+//           style: "decimal",
+//         }).format(rand(1, 300)),
+//       };
+//     });
 
 /** When needed to re-scrape/fetch APIs */
 // import { writeFile, mkdir } from "fs/promises";

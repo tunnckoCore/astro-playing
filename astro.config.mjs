@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
+// import node from "@astrojs/node";
 // import image from "@astrojs/image";
 // import { astroImageTools } from "astro-imagetools";
 
@@ -15,5 +16,5 @@ export default defineConfig({
     // }),
   ],
   // output: "server",
-  // adapter: vercel()
+  // adapter: node(),
 });

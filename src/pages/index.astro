@@ -1,45 +1,37 @@
 ---
 // import { Image } from "@astrojs/image/components";
-import MarketItem from "../components/MarketItem.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { getFakeItems } from "../utils.js";
+import MarketItem from "../components/MarketItem.astro";
+import { generateItemForId } from "../utils.js";
 
 // https://etherscan.io/nft/0x12423f35fa1e2969c73586788090f24ba72a6a1e/{id}
-// export async function getStaticPaths({}) {
-// 	const items = getFakeItems();
-
-// 	return items.map((item) => {
-// 		return {
-// 			params: item,
-// 			props: { item },
-// 		};
-// 	});
+// export async function getStaticPaths() {
+//   return [{ props: { nfts } }];
 // }
 
-// const { items } = Astro.props;
+const nfts = Array(100)
+  .fill(0)
+  .map((_, idx) => generateItemForId(idx + 1))
+  .sort((a, b) => a.rank - b.rank);
 
-const items = getFakeItems()
+// const items = getFakeItems();
 ---
 
 <BaseLayout>
-  <!-- Container for demo purpose -->
   <div class="container my-12 px-6 mx-auto">
-    <!-- Section: Design Block -->
     <section class="mb-32 text-gray-800">
       <h2 class="text-6xl font-extrabold mb-12 text-center">
-        <em
+        🌲 <em
           class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-green-500"
           >Ether Logs</em
-        >
+        > 🪵<span class="animate-pulse">🔥</span>
       </h2>
 
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4"
       >
-        {items && items.map((item) => <MarketItem {...item} />)}
+        {nfts.map((nft) => <MarketItem nft={nft} />)}
       </div>
     </section>
-    <!-- Section: Design Block -->
   </div>
-  <!-- Container for demo purpose -->
 </BaseLayout>

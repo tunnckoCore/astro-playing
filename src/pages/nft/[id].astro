@@ -4,34 +4,51 @@ import path from "path";
 // import { Image } from "@astrojs/image/components";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MarketItem from "../../components/MarketItem.astro";
+import { generateItemForId } from "../../utils.js";
 
-// export async function getStaticPaths() {
-//   const images = await Astro.glob("../../raw-images/*.png");
+export async function getStaticPaths({}) {
+  const items = Array(500).fill(0);
 
-//   return images.map((mod) => {
-//     const basename = path.basename(mod.default.src);
-//     const [id] = basename.split(".");
-//     const title = "Ether Logs #" + id;
+  return items
+    .map((_, idx) => generateItemForId(idx + 1, { isPage: true }))
+    .map((nft) => {
+      return {
+        params: { id: nft.id },
+        props: { nft },
+      };
+    });
+}
 
-//     const { src, width, height, format } = mod.default;
+const { nft } = Astro.props;
 
-//     return {
-//       props: { nft: { id, title, image: src, src, width, height, format } },
-//       params: { id: id },
-//     };
-//   });
-// }
-
-const { id } = Astro.params;
-
-const nft = { title: "Ether Logs #" + id, src: "/images/" + id, id };
+// const { id } = Astro.params;
+// const nft = { title: "Ether Logs #" + id, image: "/images/" + id, id };
 ---
 
-<BaseLayout title={nft.title}>
-  <div class="w-5/12 my-5 mx-auto">
-    <MarketItem title={nft.title} src={nft.src} id={nft.id} isPage={true} />
+<BaseLayout>
+  <div class="container mx-auto">
+    <section class="text-gray-800">
+      <h2 class="text-2xl mt-4 font-extrabold text-center">
+        🌲 <a href="/"
+          ><em
+            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-green-500"
+            >Ether Logs</em
+          >
+        </a> 🪵<span class="animate-pulse">🔥</span>
+      </h2>
+
+      <div class="w-5/12 my-4 mx-auto">
+        <MarketItem nft={nft} />
+      </div>
+    </section>
   </div>
 </BaseLayout>
+
+<!-- <BaseLayout title={nft.title}>
+  <div class="w-5/12 my-5 mx-auto">
+    <MarketItem {...nft} isPage={true} />
+  </div>
+</BaseLayout> -->
 
 <!-- <BaseLayout title="Ether Logs #131">
   <div class="w-96 mt-10 mx-auto">
