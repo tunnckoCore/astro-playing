@@ -1,0 +1,63 @@
+---
+import path from 'path';
+
+// import { Image } from "@astrojs/image/components";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketItem from '../../components/MarketItem.astro';
+import { getNftData } from '../../utils.js';
+
+export async function getStaticPaths() {
+  const items = Array(500).fill(0);
+
+  return Promise.all(
+    items.map((_, idx) => {
+      const data = getNftData(idx + 1);
+
+      return {
+        params: { id: data.id },
+        props: { nft: data },
+      };
+    }),
+  );
+}
+
+const { nft } = Astro.props;
+
+// const { id } = Astro.params;
+// const nft = { title: "Ether Logs #" + id, image: "/images/" + id, id };
+---
+
+<BaseLayout>
+  <div class="container mx-auto">
+    <section class="text-gray-800">
+      <h2 class="text-2xl mt-4 font-extrabold text-center">
+        🌲 <a href="/"
+          ><em
+            class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-green-500"
+            >Ether Logs</em
+          >
+        </a> 🪵<span class="animate-pulse">🔥</span>
+      </h2>
+
+      <div class="w-5/12 my-4 mx-auto">
+        <MarketItem nft={nft} />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<!-- <BaseLayout title={nft.title}>
+  <div class="w-5/12 my-5 mx-auto">
+    <MarketItem {...nft} isPage={true} />
+  </div>
+</BaseLayout> -->
+
+<!-- <BaseLayout title="Ether Logs #131">
+  <div class="w-96 mt-10 mx-auto">
+    <MarketItem
+      title="Ether Logs #131"
+      src="https://gateway.ipfscdn.io/ipfs/bafybeifxaxbipz6vnizbwjq4tgva2symq5m3dj3szqgnjtx6nvhxnob7cm/131.png"
+      id="131"
+    />
+  </div>
+</BaseLayout> -->

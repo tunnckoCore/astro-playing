@@ -1,22 +1,20 @@
 ---
-import path from "path";
+import path from 'path';
 
 // import { Image } from "@astrojs/image/components";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import MarketItem from "../../components/MarketItem.astro";
-import { generateItemForId } from "../../utils.js";
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MarketItem from '../../components/MarketItem.astro';
+import { getNftData } from '../../utils.js';
 
-export async function getStaticPaths({}) {
-  const items = Array(500).fill(0);
+export async function getStaticPaths() {
+  const { default: rankedNfts } = await import('../../ranked.json');
 
-  return items
-    .map((_, idx) => generateItemForId(idx + 1, { isPage: true }))
-    .map((nft) => {
-      return {
-        params: { id: nft.id },
-        props: { nft },
-      };
-    });
+  return rankedNfts.map((nft) => {
+    return {
+      props: { nft: { ...nft, isPage: true } },
+      params: { id: String(nft.id) },
+    };
+  });
 }
 
 const { nft } = Astro.props;

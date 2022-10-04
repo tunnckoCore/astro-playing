@@ -1,0 +1,52 @@
+---
+// import React, { useState, useEffect } from 'react';
+// import useSWRInfinite from 'swr/infinite';
+// import useSWR from 'swr';
+import MarketItem from './MarketItem.astro';
+// import rankedNfts from '../pages/rarest/first.json'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+// function useNfts() {
+//   const { data, error } = useSWR(
+//     `http://localhost:3000/rarest/first.json`,
+//     fetcher,
+//   );
+
+//   console.log({ data, error });
+
+//   return {
+//     data,
+//     isLoading: !error && !data,
+//     isError: error,
+//     error,
+//   };
+// }
+
+// export default function MarketList() {
+//   const [nfts, setNfts] = useState(null);
+
+//   useEffect(() => {
+//     fetcher('http://localhost:3000/rarest/first.json').then((res) =>
+//       setNfts(res),
+//     );
+//   }, []);
+
+//   // const { data: nfts = [], error, isError, isLoading } = useNfts();
+
+//   if (!nfts) {
+//     return 'Loading...';
+//   }
+//   // if (isLoading) return 'Loading...';
+//   // if (isError) return `Error: ${error}`;
+
+//   return nfts.map((nft) => <MarketItem nft={nft} />);
+// }
+
+console.log({ url: Astro.props.url });
+
+const { default: rankedNfts } = await import('../ranked.json');
+// const nfts = await fetcher('https://localhost:3000/rarest/first.json?limit=18');
+---
+
+{rankedNfts && rankedNfts.slice(0, 12).map((nft) => <MarketItem nft={nft} />)}

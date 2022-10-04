@@ -7,28 +7,32 @@ const { nft } = Astro.props;
   class="zoom-pulse shadow-xl rounded-lg relative overflow-hidden bg-no-repeat bg-cover"
 >
   <img
-    src={nft.image}
-    alt={nft.title}
+    src={nft.imageLocal}
+    alt={nft.name}
     class="w-full transition duration-300 ease-linear align-middle"
   />
-  <a href={`/nft/${nft.id}`}>
+  <a href={`/nft/etherlog-${nft.id}`}>
     <div
       class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed"
       style="background-color: rgba(31, 41, 55, 0.15)"
     >
       <div class="flex flex-col justify-between h-full">
         <h5
-          class={`flex text-slate-100 font-extrabold text-4xl m-4 sm:mt-2 sm:ml-3 sm:text-2xl md:text-xl lg:text-base ${
-            nft.isPage ? "lg:text-5xl lg:m-4" : ""
+          class={`flex  font-extrabold text-4xl m-4 sm:mt-2 sm:ml-3 sm:text-2xl md:text-xl lg:text-base ${
+            nft.isPage ? 'lg:text-4xl lg:m-4' : ''
+          } ${
+            nft.traits.background === 'ether-white'
+              ? 'text-slate-800'
+              : 'text-slate-100'
           }`}
         >
-          {nft.title}
+          {nft.name}
         </h5>
-        <div class={`m-3 lg:m-2 ${nft.isPage ? "lg:m-4" : "lg:m-2"}`}>
+        <div class={`m-3 lg:m-2 ${nft.isPage ? 'lg:m-4' : 'lg:m-2'}`}>
           <div class="flex items-center justify-between">
             <div
-              class={`py-1 px-2 rounded-md bg-slate-100 bg-opacity-80 text-gray-800 font-semibold text-xl sm:text-base md:text-sm lg:text-xs ${
-                nft.isPage ? "xl:text-xl" : "xl:text-sm"
+              class={`py-1 px-2 rounded-md shadow-lg bg-slate-100 bg-opacity-80 text-gray-800 font-semibold text-xl sm:text-base md:text-sm lg:text-xs ${
+                nft.isPage ? 'xl:text-xl' : 'xl:text-sm'
               }`}
             >
               <div class="">
@@ -42,14 +46,13 @@ const { nft } = Astro.props;
                     d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z"
                   ></path>
                 </svg> -->
-                🪵<span class="">{nft.rank}</span>
+                🪵<span id="nft-rarity-score-rank" class="">{nft.score}</span>
               </div>
             </div>
             <div
-              style="display: inline"
               class={`py-1 px-2 rounded-md bg-slate-100 bg-opacity-80 text-gray-800 font-semibold text-xl sm:text-base md:text-sm lg:text-xs ${
-                nft.isPage ? "xl:text-xl" : "xl:text-sm"
-              }`}
+                nft.isPage ? 'xl:text-xl' : 'xl:text-sm'
+              } ${nft.price ? '' : 'hidden'}`}
             >
               Ξ<span class="pl-1">{nft.price}</span>
             </div>
